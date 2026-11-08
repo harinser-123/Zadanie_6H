@@ -65,6 +65,8 @@ def on_refresh():
     now = datetime.now().strftime("%H:%M:%S")
     lbl_updated.config(text=f"Обновлено: {now}")
     btn_refresh.config(state="normal")
+# Автообновление раз в 2 минуты
+    root.after(120000, on_refresh)
 
 # Создаём главное окно
 root = tk.Tk()
@@ -86,6 +88,7 @@ btn_refresh.pack(pady=10)
 # Подпись «Обновлено: ...»
 lbl_updated = ttk.Label(root, text="Обновлено: —", foreground="gray")
 lbl_updated.pack(side="bottom", pady=10)
-
+# Первое обновление сразу при старте
+root.after(0, on_refresh)
 # Запускаем цикл обработки событий
 root.mainloop()
